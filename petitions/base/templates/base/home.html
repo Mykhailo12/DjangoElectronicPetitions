@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<a href="{% url 'login' %}" class="lr">
+    <p>Увійти / Зареєструватися</p>
+</a>
+
+{% for pet in pets %}
+
+<p class="pet-item">№{{pet.id}}</p>
+<h3 class="pet-name"><a href="{% url 'petition-detail' pet.id %}">{{pet.name}}</a></h3>
+<h4 class="pet-item">Автор петиції: {{pet.author.name}} {{pet.author.surname}} {{pet.author.father}}</h4>
+<p class="pet-item">Зібрано підписів: {{pet.subs.all.count}}</p>
+<p class="pet-item">Опубліковано: {{pet.created}}</p>
+
+{% endfor %}
+
+{% endblock %}

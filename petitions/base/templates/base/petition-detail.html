@@ -1,0 +1,8 @@
+{% extends 'main.html' %}
+{% block content %}
+<p class="pet-item">№{{pet.id}}</p>
+<h3 class="pet-name"><a href="#">{{pet.name}}</a></h3>
+<h4 class="pet-item">Автор петиції: {{pet.author.name}} {{pet.author.surname}} {{pet.author.father}}</h4>
+<p class="pet-item">Зібрано підписів: {{pet.subs.all.count}}</p>
+<p class="pet-item">Опубліковано: {{pet.created}}</p>
+{% endblock %}

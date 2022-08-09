@@ -1,0 +1,43 @@
+.nav-item {
+    font-size: 31px;
+    color: black;
+}
+.logo {
+    margin-top: 15px;
+}
+.link {
+    color: black;
+    margin-top: 10px;
+    font-family: Courier, monospace;
+    margin-left: 40px;
+}
+
+a {
+    padding: 0;
+}
+hr {
+    margin: 0;
+}
+
+.liniya {
+    margin-top: 0;
+}
+
+.lr {
+    align-content: center;
+    color: black;
+    margin-top: 10px;
+    font-family: Courier, monospace;
+    text-align: center;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.pet-name {
+    margin: 30px;
+    margin-left: 100px;
+}
+
+.pet-item {
+    margin-left: 100px;
+}
