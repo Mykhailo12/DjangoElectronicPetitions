@@ -1,9 +1,15 @@
 {% extends 'main.html' %}
 {% block content %}
 
+{% if request.user.is_authenticated %}
+<p class="pet-item">{{request.user.username}}</p>
+<p class="pet-item"><a href="{% url 'logout' %}">Logout</a></p>
+<p class="pet-item"><a href="{% url 'petition-create' %}">Create Petition</a></p>
+{% else %}
 <a href="{% url 'login' %}" class="lr">
     <p>Увійти / Зареєструватися</p>
 </a>
+{% endif %}
 
 {% for pet in pets %}
 

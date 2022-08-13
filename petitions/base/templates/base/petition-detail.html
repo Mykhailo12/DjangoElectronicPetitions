@@ -5,4 +5,8 @@
 <h4 class="pet-item">Автор петиції: {{pet.author.name}} {{pet.author.surname}} {{pet.author.father}}</h4>
 <p class="pet-item">Зібрано підписів: {{pet.subs.all.count}}</p>
 <p class="pet-item">Опубліковано: {{pet.created}}</p>
+{% if request.user == pet.author %}
+    <p class="pet-item"><a href="{% url 'petition-update' pet.id %}">Update</a></p>
+    <p class="pet-item"><a href="{% url 'petition-delete' pet.id %}">Delete</a></p>
+{% endif %}
 {% endblock %}
