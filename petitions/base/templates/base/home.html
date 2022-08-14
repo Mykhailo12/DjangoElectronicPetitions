@@ -2,22 +2,37 @@
 {% block content %}
 
 {% if request.user.is_authenticated %}
-<p class="pet-item">{{request.user.username}}</p>
-<p class="pet-item"><a href="{% url 'logout' %}">Logout</a></p>
-<p class="pet-item"><a href="{% url 'petition-create' %}">Create Petition</a></p>
+<p class="pet-item">Аккаунт: {{request.user.username}}</p>
+<p class="pet-item"><a href="{% url 'logout' %}">Вийти</a></p>
+<p class="pet-item"><a href="{% url 'petition-create' %}">Створити петицію</a></p>
 {% else %}
 <a href="{% url 'login' %}" class="lr">
     <p>Увійти / Зареєструватися</p>
 </a>
 {% endif %}
 
-{% for pet in pets %}
+<form class="header__search pet-item" method="GET" action="{% url 'home' %}">
+    <input name="q" placeholder="Введіть назву петиції" width="400" height="50" />
+    <input type="submit" value="Знайти"/>
+</form>
 
-<p class="pet-item">№{{pet.id}}</p>
-<h3 class="pet-name"><a href="{% url 'petition-detail' pet.id %}">{{pet.name}}</a></h3>
-<h4 class="pet-item">Автор петиції: {{pet.author.name}} {{pet.author.surname}} {{pet.author.father}}</h4>
-<p class="pet-item">Зібрано підписів: {{pet.subs.all.count}}</p>
-<p class="pet-item">Опубліковано: {{pet.created}}</p>
+{% for pet in pets %}
+{% if pet.subs.all.count < 10 %}
+    <hr>
+    <p class="pet-item">№{{pet.id}}</p>
+    <h3 class="pet-name"><a href="{% url 'petition-detail' pet.id %}">{{pet.name}}</a></h3>
+    <h4 class="pet-item">Автор петиції: {{pet.author.name}} {{pet.author.surname}} {{pet.author.father}}</h4>
+    <p class="pet-item">Зібрано підписів: {{pet.subs.all.count}}/10</p>
+    <p class="pet-item">Статус: {{pet.status}}</p>
+    <p class="pet-item">Опубліковано: {{pet.created}}</p>
+    {% if request.user.is_authenticated %}
+        {% if request.user != pet.author %}
+            <button class="pet-item"><a href="{% url 'subscribe' pet.id %}">Залишити підпис</a></button>
+            <hr>
+        {% endif %}
+    {% endif %}
+{% endif %}
+
 
 {% endfor %}
 

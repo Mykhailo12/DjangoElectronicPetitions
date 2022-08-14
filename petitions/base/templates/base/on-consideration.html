@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<p class="pet-item">{{request.user.username}}</p>
+<p class="pet-item"><a href="{% url 'logout' %}">Logout</a></p>
+<p class="pet-item"><a href="{% url 'petition-create' %}">Create Petition</a></p>
+{% else %}
+<a href="{% url 'login' %}" class="lr">
+    <p>Увійти / Зареєструватися</p>
+</a>
+{% endif %}
+
+{% for pet in pets %}
+
+{% if pet.subs.all.count == 10 %}
+    <hr>
+    <p class="pet-item">№{{pet.id}}</p>
+    <h3 class="pet-name"><a href="{% url 'petition-detail' pet.id %}">{{pet.name}}</a></h3>
+    <h4 class="pet-item">Автор петиції: {{pet.author.name}} {{pet.author.surname}} {{pet.author.father}}</h4>
+    <p class="pet-item">Зібрано підписів: {{pet.subs.all.count}}/10</p>
+    <p class="pet-item">Статус: {{pet.status}}</p>
+    <p class="pet-item">Опубліковано: {{pet.created}}</p>
+{% endif %}
+
+
+{% endfor %}
+{% endblock %}
